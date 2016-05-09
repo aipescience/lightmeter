@@ -1,0 +1,12 @@
+prerequisites
+-------------
+
+```
+apt-get install libdatetime-perl libdatetime-event-sunrise-perl libdbd-pg-perl
+```
+
+```
+cpan install Astro::Time.pm
+```
+
+-db -readings 0 -interval 2 -sun -config $sqm_dir/sqm_robo.conf -ana
