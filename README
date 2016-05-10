@@ -1,12 +1,42 @@
-prerequisites
--------------
+Lightmeter
+==========
+
+This is a set of scripts to read out an SQM lightmeter, store it in a Postgres database table,
+and send it to the verlustdernacht.aip.de webservice.
+
+
+Setup on CentOS7
+----------------
+
+Install Postgres:
 
 ```
-apt-get install libdatetime-perl libdatetime-event-sunrise-perl libdbd-pg-perl
+yum install postgresql postgresql-devel postgresql-server postgresql-contrib python-psycopg2
+postgresql-setup initdb
+createuser 
 ```
 
+as postgres user:
+
 ```
-cpan install Astro::Time.pm
+createuser lightmeter  # or a different user
+createdb lightmeter -O lightmeter
 ```
 
--db -readings 0 -interval 2 -sun -config $sqm_dir/sqm_robo.conf -ana
+Create `settings.py` file including:
+
+```
+SQM_IP = ''                  # IP address of the lightmeter
+SQM_PORT = 10001             # TCP port of the lightmeter
+
+INTERVALL = 2                # read-out intevall in seconds
+
+DB_NAME = 'lightmeter'       # local database
+DB_TABLE = 'sqm_babelsberg'  # local database table
+
+API_URL= ''                  # url of the webservice (ending on /api/measurements/)
+API_USER = ''                # authentication username
+API_PASS = ''                # authentication password
+API_LOCATION = ''            # location slug of this lightmeter in the web service
+```
+

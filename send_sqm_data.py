@@ -6,7 +6,7 @@ import requests
 
 from datetime import datetime
 
-from settings import DB_NAME, DB_TABLE, LOCATION, API_URL, API_USER, API_PASS
+from settings import DB_NAME, DB_TABLE, API_URL, API_USER, API_PASS, API_LOCATION
 
 
 def serializer(obj):
@@ -40,7 +40,7 @@ conn.close()
 
 data = json.loads(json.dumps({
     'count': len(rows),
-    'location': LOCATION,
+    'location': API_LOCATION,
     'rows': rows
 }, default=serializer))
 
