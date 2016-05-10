@@ -1,5 +1,5 @@
 [Unit]
-Description=Read data from SQM lightmeter
+Description=reading data from SQM lightmeter
 
 [Service]
 ExecStart=/path/to/lightmeter/read_sqm_data.py
