@@ -8,6 +8,7 @@ from datetime import datetime
 
 from settings import DB_NAME, DB_TABLE, LOCATION, API_URL, API_USER, API_PASS
 
+
 def serializer(obj):
     if isinstance(obj, datetime):
         serial = obj.replace(tzinfo=UTC).isoformat()
@@ -15,14 +16,13 @@ def serializer(obj):
     else:
         return obj
 
-print API_URL + 'latest/'
 response = requests.get(API_URL + 'latest/')
 
 if response.status_code == 404:
     latest = False
 else:
     latest = response.json()['timestamp']
-    
+
 conn = psycopg2.connect("dbname='%s'" % DB_NAME)
 cur = conn.cursor()
 

@@ -29,9 +29,9 @@ while 1:
                 'period': float(match.group(4)),
                 'temperature': float(match.group(5))
             }
-        
+
             insert_stmt = 'INSERT INTO %s ' % DB_TABLE
-            insert_stmt += '(magnitude, frequency, counts, period, temperature) ' 
+            insert_stmt += '(magnitude, frequency, counts, period, temperature) '
             insert_stmt += 'VALUES (%(magnitude)s, %(frequency)s, %(counts)s, %(period)s, %(temperature)s)'
 
             cur.execute(insert_stmt, values)
