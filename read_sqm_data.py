@@ -30,12 +30,13 @@ while 1:
                 'temperature': float(match.group(5))
             }
 
-            insert_stmt = 'INSERT INTO %s ' % DB_TABLE
-            insert_stmt += '(magnitude, frequency, counts, period, temperature) '
-            insert_stmt += 'VALUES (%(magnitude)s, %(frequency)s, %(counts)s, %(period)s, %(temperature)s)'
+            if values['magnitude'] > 0:
+                insert_stmt = 'INSERT INTO %s ' % DB_TABLE
+                insert_stmt += '(magnitude, frequency, counts, period, temperature) '
+                insert_stmt += 'VALUES (%(magnitude)s, %(frequency)s, %(counts)s, %(period)s, %(temperature)s)'
 
-            cur.execute(insert_stmt, values)
-            conn.commit()
+                cur.execute(insert_stmt, values)
+                conn.commit()
         except ValueError:
             pass
 
