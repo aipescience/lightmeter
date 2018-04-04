@@ -6,7 +6,7 @@ import requests
 
 from datetime import datetime
 
-from settings import DB_NAME, DB_TABLE, API_URL, API_USER, API_PASS, API_LOCATION
+from settings import DB_CONNECTION, DB_TABLE, API_URL, API_USER, API_PASS, API_LOCATION
 
 
 def serializer(obj):
@@ -23,7 +23,7 @@ if response.status_code == 404:
 else:
     latest = response.json()['timestamp']
 
-conn = psycopg2.connect("dbname='%s'" % DB_NAME)
+conn = psycopg2.connect(DB_CONNECTION)
 cur = conn.cursor()
 
 select_stmt = "SELECT * FROM %s" % DB_TABLE

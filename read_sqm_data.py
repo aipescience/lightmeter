@@ -4,7 +4,7 @@ import re
 import socket
 import time
 
-from settings import SQM_IP, SQM_PORT, DB_NAME, DB_TABLE, INTERVALL
+from settings import SQM_IP, SQM_PORT, DB_CONNECTION, DB_TABLE, INTERVALL
 
 # r, 00.00m,0000722291Hz,0000000000c,0000000.000s, 031.5C
 prog = re.compile(r'(\d+\.\d+)m.*?(\d+)Hz.*?(\d+)c.*?(\d+\.\d+)s.*?(\d+\.\d+)C')
@@ -12,7 +12,7 @@ prog = re.compile(r'(\d+\.\d+)m.*?(\d+)Hz.*?(\d+)c.*?(\d+\.\d+)s.*?(\d+\.\d+)C')
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((SQM_IP, SQM_PORT))
 
-conn = psycopg2.connect("dbname='%s'" % DB_NAME)
+conn = psycopg2.connect(DB_CONNECTION)
 cur = conn.cursor()
 
 while 1:

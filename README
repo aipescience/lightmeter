@@ -37,13 +37,19 @@ SQM_PORT = 10001             # TCP port of the lightmeter
 
 INTERVALL = 2                # read-out intevall in seconds
 
-DB_NAME = 'lightmeter'       # local database
-DB_TABLE = 'sqm_babelsberg'  # local database table
+DB_CONNECTION = 'dbname=lightmeter'  # connection to the local database
+DB_TABLE = 'sqm_babelsberg'          # local database table
 
 API_URL= ''                  # url of the webservice (ending on /api/measurements/)
 API_USER = ''                # authentication username
 API_PASS = ''                # authentication password
 API_LOCATION = ''            # location slug of this lightmeter in the web service
+```
+
+Create the database table:
+
+```
+./create_sqm_table.py
 ```
 
 Edit and copy systemd config:
@@ -60,6 +66,3 @@ systemctl start lightmeter.service
 ```
 
 The database table should now filled with measurements.
-
-
-
