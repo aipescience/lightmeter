@@ -16,7 +16,7 @@ def serializer(obj):
     else:
         return obj
 
-response = requests.get(API_URL + 'latest/')
+response = requests.get(API_URL + 'latest/?location=' + API_LOCATION)
 
 if response.status_code == 404:
     latest = False
@@ -27,11 +27,11 @@ conn = psycopg2.connect(DB_CONNECTION)
 cur = conn.cursor()
 
 select_stmt = "SELECT * FROM %s" % DB_TABLE
-
 if latest:
-    cur.execute(select_stmt + " WHERE timestamp > %s", (latest, ))
-else:
-    cur.execute(select_stmt)
+    select_stmt += ' WHERE timestamp > \'%s\'' % latest
+select_stmt += ' ORDER BY timestamp limit 100000'
+
+cur.execute(select_stmt)
 
 rows = cur.fetchall()
 
